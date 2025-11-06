@@ -20,4 +20,5 @@ then
     echo "MySQL server installed successfully."
 else
     echo "Failed to install MySQL server."
+    exit 1
 fi
