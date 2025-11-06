@@ -29,5 +29,4 @@ then
     fi
 else
     echo "MySQL server is already installed."
-    exit 1
 fi
