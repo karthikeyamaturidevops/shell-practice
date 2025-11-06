@@ -12,17 +12,6 @@ else
     echo "SUCCESS:: Running script as root user."
 fi
 
-#   Function to check installation status
-checkInstallation() {
-    if [ $1 -eq 0 ]
-    then
-        echo "$2 installed successfully."
-    else
-        echo "Failed to install $2."
-        exit 1
-    fi
-}
-
 # Check if MySQL server is installed
 dnf list installed mysql -y
 
@@ -31,7 +20,13 @@ if [ $? -ne 0 ]
 then
     echo "MySQL server is not installed. Installing now..."
     dnf install mysql -y
-    checkInstallation $? "MySQL server"
+    if [ $? -eq 0 ]
+    then
+        echo "MySQL server installed successfully."
+    else
+        echo "Failed to install MySQL server."
+        exit 1
+    fi
 else
     echo "MySQL server is already installed."
 fi
@@ -43,7 +38,13 @@ if [ $? -ne 0 ]
 then
     echo "Nginx server is not installed. Installing now..."
     dnf install nginx -y
-    checkInstallation $? "nginx server"
+    if [ $? -eq 0 ]
+    then
+        echo "Nginx server installed successfully."
+    else
+        echo "Failed to install Nginx server."
+        exit 1
+    fi
 else
     echo "Nginx server is already installed."
 fi
