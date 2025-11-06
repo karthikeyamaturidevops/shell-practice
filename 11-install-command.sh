@@ -2,7 +2,7 @@
 
 # install mysql
 
-USERID =$(id -u)
+USERID=$(id -u)
 
 if [ $USERID -nq 0 ]
 then
