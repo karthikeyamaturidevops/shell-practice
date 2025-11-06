@@ -4,8 +4,8 @@ USERID=$(id -u) # Get the user ID of the current user
 
 # Check if the user is root
 
-if [ $USERID -ne 0 ] 
-then 
+if [ $USERID -ne 0 ]
+then
     echo "ERROR:: Please run the script as root user."
     exit 1
 else
@@ -13,12 +13,21 @@ else
 fi
 
 # Install MySQL server
-dnf install mysql -y 
+echo "Checking if MySQL server is installed..."
 
-if [ $? -eq 0 ]
-then 
-    echo "MySQL server installed successfully."
+dnf list installed mysql -y
+
+if [ $? -ne 0 ]
+then
+    dnf install mysql -y
+    if [ $? -eq 0 ]
+    then
+        echo "MySQL server installed successfully."
+    else
+        echo "Failed to install MySQL server."
+        exit 1
+    fi
 else
-    echo "Failed to install MySQL server."
+    echo "MySQL server is already installed."
     exit 1
 fi
