@@ -13,7 +13,7 @@ else
 fi
 
 # Install MySQL server
-dnf install mysqlhhyjguyg8gi -y 
+dnf install mysql -y 
 
 if [ $? -eq 0 ]
 then 
